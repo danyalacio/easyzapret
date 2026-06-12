@@ -1,0 +1,24 @@
+export function Logo({ size = 36 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 512 512" aria-hidden>
+      <defs>
+        <linearGradient id="logo-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#2563eb" />
+          <stop offset="1" stopColor="#14b8a6" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M256 36 L432 96 V250 C432 366 357 442 256 478 C155 442 80 366 80 250 V96 Z"
+        fill="url(#logo-g)"
+      />
+      <path
+        d="M256 60 L408 112 V250 C408 352 342 420 256 452 C170 420 104 352 104 250 V112 Z"
+        fill="none"
+        stroke="#ffffff"
+        strokeOpacity="0.25"
+        strokeWidth="10"
+      />
+      <path d="M292 116 L176 280 H246 L222 396 L344 222 H270 Z" fill="#ffffff" />
+    </svg>
+  );
+}
