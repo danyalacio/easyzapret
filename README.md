@@ -1,4 +1,5 @@
 <div align="center">
+
 # ⬇️ Скачать для Windows
 
 **Установщик лежит не в «Code», а в разделе Releases — откройте его и скачайте файл `EasyZapret_*_x64-setup.exe` из блока Assets.**
@@ -15,7 +16,7 @@
 
 *Актуальная версия: [v0.1.1](https://github.com/danyalacio/easyzapret/releases/tag/v0.1.1) · Windows 10/11 x64 · нужны права администратора*
 
-# EasyZapret
+## EasyZapret
 
 **Десктопный менеджер для [zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube) и [tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy) от FlowSeal**
 
