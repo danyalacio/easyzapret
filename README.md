@@ -1,4 +1,19 @@
 <div align="center">
+# ⬇️ Скачать для Windows
+
+**Установщик лежит не в «Code», а в разделе Releases — откройте его и скачайте файл `EasyZapret_*_x64-setup.exe` из блока Assets.**
+
+<br>
+
+<a href="https://github.com/danyalacio/easyzapret/releases/latest">
+  <img src="https://img.shields.io/badge/Скачать_последнюю_версию-Releases-0ea5e9?style=for-the-badge&logo=github&logoColor=white" alt="Скачать EasyZapret" height="48">
+</a>
+
+<br>
+
+**[→ Открыть страницу релизов (скачать установщик)](https://github.com/danyalacio/easyzapret/releases/latest)**
+
+*Актуальная версия: [v0.1.1](https://github.com/danyalacio/easyzapret/releases/tag/v0.1.1) · Windows 10/11 x64 · нужны права администратора*
 
 # EasyZapret
 
