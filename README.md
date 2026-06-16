@@ -12,7 +12,7 @@
 
 <br>
 
-**[→ Открыть страницу релизов (скачать установщик)](https://github.com/danyalacio/easyzapret/releases/latest)**
+**[→ Открыть страницу релизов](https://github.com/danyalacio/easyzapret/releases/latest)**
 
 *Актуальная версия: [v0.1.1](https://github.com/danyalacio/easyzapret/releases/tag/v0.1.1) · Windows 10/11 x64 · нужны права администратора*
 
