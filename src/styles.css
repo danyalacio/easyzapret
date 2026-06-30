@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+<<<<<<< HEAD
 @custom-variant purple (&:where(.theme-purple, .theme-purple *));
 
 :root {
@@ -11,10 +12,16 @@
   --surface-elevated: 255 255 255;
   --border: 226 232 240;
   --muted: 100 116 139;
+=======
+
+:root {
+  color-scheme: light;
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 }
 
 .dark {
   color-scheme: dark;
+<<<<<<< HEAD
   --accent: 45 212 191;
   --accent-fg: 15 23 42;
   --surface: 2 6 23;
@@ -31,6 +38,8 @@
   --surface-elevated: 22 18 42;
   --border: 46 38 78;
   --muted: 167 154 196;
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 }
 
 html,
@@ -50,6 +59,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
   user-select: none;
+<<<<<<< HEAD
   background: rgb(var(--surface));
   color: rgb(15 23 42);
 }
@@ -57,6 +67,8 @@ body {
 .dark body,
 .theme-purple body {
   color: rgb(241 245 249);
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 }
 
 textarea,
@@ -66,6 +78,7 @@ code {
   user-select: text;
 }
 
+<<<<<<< HEAD
 *::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -76,10 +89,24 @@ code {
 }
 *::-webkit-scrollbar-thumb:hover {
   background: rgb(var(--muted) / 0.55);
+=======
+/* Thin scrollbars matching the theme */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: rgb(148 163 184 / 0.4);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(148 163 184 / 0.7);
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 }
 *::-webkit-scrollbar-track {
   background: transparent;
 }
+<<<<<<< HEAD
 
 .bg-accent {
   background-color: rgb(var(--accent));
@@ -96,3 +123,5 @@ code {
 .border-accent-soft {
   border-color: rgb(var(--accent) / 0.25);
 }
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9

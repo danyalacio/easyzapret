@@ -1,8 +1,12 @@
 import { invoke } from "@tauri-apps/api/core";
 import type {
+<<<<<<< HEAD
   AutopilotStatus,
   AppInfo,
   AppUpdateStatus,
+=======
+  AppInfo,
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   ComponentsState,
   DiagItem,
   FullStatus,
@@ -12,7 +16,10 @@ import type {
   TgStatus,
   UpdateStatus,
   UserListFile,
+<<<<<<< HEAD
   WarpStatus,
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   ZapretStatus,
 } from "./types";
 
@@ -29,7 +36,10 @@ export const api = {
   installComponent: (component: "zapret" | "tgproxy") =>
     invoke<string>("install_component", { component }),
   checkUpdates: () => invoke<UpdateStatus[]>("check_updates"),
+<<<<<<< HEAD
   checkAppUpdate: () => invoke<AppUpdateStatus>("check_app_update"),
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
   // zapret
   listStrategies: () => invoke<string[]>("list_strategies"),
@@ -59,6 +69,7 @@ export const api = {
   startTg: () => invoke<void>("start_tg"),
   stopTg: () => invoke<void>("stop_tg"),
 
+<<<<<<< HEAD
   // cloudflare warp
   warpDetails: () => invoke<WarpStatus>("warp_details"),
   warpConnect: () => invoke<void>("warp_connect"),
@@ -70,6 +81,8 @@ export const api = {
   getAutopilotStatus: () => invoke<AutopilotStatus>("get_autopilot_status"),
   runAutopilotCheckNow: () => invoke<AutopilotStatus>("run_autopilot_check_now"),
 
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   // lists
   readUserLists: () => invoke<{ files: UserListFile[] }>("read_user_lists"),
   saveUserList: (name: string, content: string) =>

@@ -6,11 +6,17 @@ export default {
   nav: {
     home: "Главная",
     strategies: "Стратегии",
+<<<<<<< HEAD
     zapret: "Zapret",
     service: "Zapret: Сервис",
     tests: "Zapret: Тесты",
     lists: "Zapret: Списки",
     autopilot: "Автопилот",
+=======
+    service: "Zapret: Сервис",
+    tests: "Zapret: Тесты",
+    lists: "Zapret: Списки",
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     telegram: "Telegram",
     logs: "Логи",
     settings: "Настройки",
@@ -57,8 +63,11 @@ export default {
     tests_already_running: "Тесты уже выполняются.",
     service_installed: "Установлена служба zapret. Удалите её на вкладке «Сервис» перед запуском тестов.",
     dpi_suite_unavailable: "Не удалось загрузить список DPI-чекеров. Проверьте сеть.",
+<<<<<<< HEAD
     zapret_required: "WARP включается только при работающем Zapret. Сначала включите Zapret.",
     warp_not_installed: "Cloudflare WARP не установлен. Установите клиент 1.1.1.1 и повторите.",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     generic: "Произошла ошибка: {{message}}",
   },
   home: {
@@ -66,8 +75,11 @@ export default {
     zapretDesc: "Обход DPI для Discord, YouTube и других сервисов",
     tgTitle: "Telegram Proxy",
     tgDesc: "Локальный MTProto-прокси (tg-ws-proxy) для Telegram Desktop",
+<<<<<<< HEAD
     warpTitle: "Cloudflare WARP",
     warpDesc: "Туннель Cloudflare поверх Zapret (работает только при включённом Zapret)",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     strategy: "Стратегия",
     noStrategy: "Стратегия не выбрана",
     viaService: "Работает как служба Windows",
@@ -83,6 +95,7 @@ export default {
     updatesError: "не удалось проверить",
     checkNow: "Проверить сейчас",
     installFirst: "Сначала установите компонент",
+<<<<<<< HEAD
     autopilotTitle: "Автопилот",
     autopilotDesc: "Следит за доступом и подстраивает стратегию",
     autopilotOn: "Активен",
@@ -165,6 +178,8 @@ export default {
     itemZapret:
       "Компактное меню — Сервис, Тесты и Списки объединены во вкладки раздела Zapret.",
     itemPurple: "Новая тёмная тема Amethyst — современное фиолетовое оформление.",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   },
   setup: {
     title: "Первоначальная настройка",
@@ -189,6 +204,7 @@ export default {
       "Готовые стратегии из релиза FlowSeal. Выбранная стратегия используется переключателем на главном экране и при установке службы.",
     empty: "Стратегии не найдены. Установите zapret в настройках.",
     current: "Выбрана",
+<<<<<<< HEAD
     selected: "Текущая стратегия",
     count: "{{count}} стратегий",
     search: "Поиск по названию…",
@@ -197,6 +213,8 @@ export default {
     groupAlt: "ALT",
     groupFakeTls: "FAKE TLS",
     groupSimpleFake: "SIMPLE FAKE",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     select: "Выбрать",
     restartHint: "Zapret запущен — чтобы применить новую стратегию, перезапустите его.",
     restartNow: "Перезапустить с новой стратегией",
@@ -318,6 +336,7 @@ export default {
     mediaHint:
       "Не грузятся фото/видео? В настройках прокси Telegram удалите все записи DC → IP, кроме 4:149.154.167.220. Если не помогло — полностью очистите этот список.",
   },
+<<<<<<< HEAD
   warp: {
     title: "Cloudflare WARP",
     description:
@@ -348,11 +367,16 @@ export default {
     conflictNote:
       "WARP и Zapret одновременно меняют сетевой трафик. Если соединение нестабильно — попробуйте режим WARP+DoH или переподключите WARP.",
   },
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   logs: {
     title: "Логи",
     zapret: "Zapret",
     tgproxy: "Telegram Proxy",
+<<<<<<< HEAD
     warp: "WARP",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     tests: "Тесты",
     app: "Система",
     empty: "Лог пуст",
@@ -368,13 +392,20 @@ export default {
     theme: "Тема",
     themeLight: "Светлая",
     themeDark: "Тёмная",
+<<<<<<< HEAD
     themePurple: "Amethyst",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     themeSystem: "Системная",
     dataDir: "Папка данных",
     dataDirNote: "Фиксированный путь — без кириллицы и пробелов, как требует zapret.",
     components: "Компоненты",
     checkUpdates: "Проверить обновления",
+<<<<<<< HEAD
     checkUpdatesOnStart: "Автопроверка обновлений (при запуске и раз в час)",
+=======
+    checkUpdatesOnStart: "Проверять обновления при запуске",
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     updateAvailable: "Доступна версия {{version}}",
     upToDate: "Актуальная версия",
     notChecked: "Не проверялось",
@@ -393,6 +424,7 @@ export default {
     aboutText: "EasyZapret {{version}} — GUI для zapret-discord-youtube и tg-ws-proxy от FlowSeal. Спасибо FlowSeal и bol-van.",
     updatesModalTitle: "Доступны обновления",
     updatesModalText: "Вышли новые версии компонентов. Обновление скачает свежий релиз с GitHub (пользовательские списки сохранятся).",
+<<<<<<< HEAD
     appUpdateAvailable: "Доступна новая версия EasyZapret: {{version}}",
     appUpToDate: "У вас последняя версия EasyZapret",
     downloadUpdate: "Скачать обновление",
@@ -406,6 +438,8 @@ export default {
     updateConfirmTg:
       "Перед обновлением Telegram Proxy будет остановлен (закроется TgWsProxy). После установки новой версии можно запустить его снова. Продолжить?",
     updateContinue: "Остановить и обновить",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   },
   adminWarning:
     "Нет прав администратора! Запустите EasyZapret от имени администратора — иначе zapret и службы работать не будут.",

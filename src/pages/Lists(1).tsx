@@ -6,11 +6,7 @@ import { toast } from "../lib/toast";
 import { Button, Card, Note, PageHeader, Spinner, cn } from "../components/ui";
 import type { UserListFile } from "../lib/types";
 
-<<<<<<< HEAD
-export function ListsPage({ embedded }: { embedded?: boolean } = {}) {
-=======
 export function ListsPage() {
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const { t } = useTranslation();
   const [files, setFiles] = useState<UserListFile[]>([]);
   const [active, setActive] = useState<string>("list-general-user.txt");
@@ -54,15 +50,8 @@ export function ListsPage() {
   }
 
   return (
-<<<<<<< HEAD
-    <div className={embedded ? "flex h-full flex-col" : "mx-auto flex h-full max-w-3xl flex-col"}>
-      {!embedded && (
-        <PageHeader title={t("lists.title")} description={t("lists.description")} />
-      )}
-=======
     <div className="mx-auto flex h-full max-w-3xl flex-col">
       <PageHeader title={t("lists.title")} description={t("lists.description")} />
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
       <div className="mb-3 flex flex-wrap gap-1.5">
         {files.map((f) => (

@@ -46,11 +46,7 @@ function BigToggleCard({
             className={
               "flex h-14 w-14 items-center justify-center rounded-2xl transition-colors " +
               (on
-<<<<<<< HEAD
-                ? "bg-accent-soft text-accent"
-=======
                 ? "bg-teal-500/15 text-teal-600 dark:text-teal-400"
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
                 : "bg-slate-100 text-slate-400 dark:bg-slate-800")
             }
           >
@@ -79,32 +75,17 @@ function BigToggleCard({
 
 export function HomePage() {
   const { t } = useTranslation();
-<<<<<<< HEAD
-  const { status, settings, components, updates, appUpdate, updatesCheckedAt, updatesError, refreshStatus, checkUpdates, setPage, updateSettings } =
-=======
   const { status, settings, components, updates, updatesCheckedAt, updatesError, refreshStatus, checkUpdates, setPage } =
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     useStore();
 
   const [zapretBusy, setZapretBusy] = useState(false);
   const [tgBusy, setTgBusy] = useState(false);
-<<<<<<< HEAD
-  const [warpBusy, setWarpBusy] = useState(false);
   const [zapretError, setZapretError] = useState<string | null>(null);
   const [tgError, setTgError] = useState<string | null>(null);
-  const [warpError, setWarpError] = useState<string | null>(null);
-=======
-  const [zapretError, setZapretError] = useState<string | null>(null);
-  const [tgError, setTgError] = useState<string | null>(null);
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const [checking, setChecking] = useState(false);
 
   const zapret = status?.zapret;
   const tg = status?.tg;
-<<<<<<< HEAD
-  const warp = status?.warp;
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const zapretOn = !!(zapret?.running || zapret?.serviceState === "RUNNING");
   const viaService = !zapret?.running && zapret?.serviceState === "RUNNING";
 
@@ -159,36 +140,6 @@ export function HomePage() {
     }
   }
 
-<<<<<<< HEAD
-  async function toggleWarp(value: boolean) {
-    setWarpError(null);
-    if (value && !warp?.installed) {
-      setWarpError(t("errors.warp_not_installed"));
-      setPage("warp");
-      return;
-    }
-    if (value && !zapretOn) {
-      setWarpError(t("warp.needZapret"));
-      return;
-    }
-    setWarpBusy(true);
-    try {
-      if (value) {
-        await api.warpConnect();
-        await new Promise((r) => setTimeout(r, 1500));
-      } else {
-        await api.warpDisconnect();
-      }
-      await refreshStatus();
-    } catch (e) {
-      setWarpError(errText(t, e));
-    } finally {
-      setWarpBusy(false);
-    }
-  }
-
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   async function onCheckUpdates() {
     setChecking(true);
     try {
@@ -198,11 +149,7 @@ export function HomePage() {
     }
   }
 
-<<<<<<< HEAD
-  const updatesAvailable = updates?.some((u) => u.updateAvailable) || appUpdate?.updateAvailable;
-=======
   const updatesAvailable = updates?.some((u) => u.updateAvailable);
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const updatesLabel = !updatesCheckedAt
     ? t("home.updatesUnknown")
     : updatesError
@@ -213,47 +160,6 @@ export function HomePage() {
 
   return (
     <div className="mx-auto flex h-full max-w-3xl flex-col gap-5">
-<<<<<<< HEAD
-      {settings && (
-        <Card className="flex flex-wrap items-center justify-between gap-4 p-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
-                {t("home.autopilotTitle")}
-                {status?.autopilot.enabled && (
-                  <Badge tone={status.autopilot.checking ? "warn" : "ok"}>
-                    {status.autopilot.checking ? t("home.autopilotChecking") : t("home.autopilotOn")}
-                  </Badge>
-                )}
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {status?.autopilot.lastHealthPercent != null
-                  ? t("home.autopilotHealth", { percent: status.autopilot.lastHealthPercent })
-                  : t("home.autopilotDesc")}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Switch
-              checked={settings.autopilot.enabled}
-              onChange={(v) =>
-                updateSettings({ autopilot: { ...settings.autopilot, enabled: v } })
-              }
-            />
-            <Button variant="ghost" onClick={() => setPage("autopilot")}>
-              {t("common.details")}
-            </Button>
-          </div>
-        </Card>
-      )}
-
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
       <BigToggleCard
         icon={
           <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
@@ -273,11 +179,7 @@ export function HomePage() {
               {t("home.strategy")}:
             </span>
             <button
-<<<<<<< HEAD
-              className="text-accent underline-offset-2 hover:underline"
-=======
               className="text-teal-600 underline-offset-2 hover:underline dark:text-teal-400"
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
               onClick={() => setPage("strategies")}
             >
               {viaService
@@ -312,11 +214,7 @@ export function HomePage() {
               {tg?.host ?? "127.0.0.1"}:{tg?.port ?? 1443}
             </code>
             <button
-<<<<<<< HEAD
-              className="text-accent underline-offset-2 hover:underline"
-=======
               className="text-teal-600 underline-offset-2 hover:underline dark:text-teal-400"
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
               onClick={() => setPage("telegram")}
             >
               {t("common.details")}
@@ -326,42 +224,6 @@ export function HomePage() {
         }
       />
 
-<<<<<<< HEAD
-      <BigToggleCard
-        icon={
-          <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-          </svg>
-        }
-        title={t("home.warpTitle")}
-        description={t("home.warpDesc")}
-        on={!!warp?.connected}
-        busy={warpBusy}
-        error={warpError}
-        disabled={!warp?.installed && !warp?.connected}
-        onToggle={toggleWarp}
-        subtitle={
-          <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            {!zapretOn && !warp?.connected ? (
-              <Badge tone="warn">{t("warp.needZapret")}</Badge>
-            ) : (
-              <span className="font-medium text-slate-600 dark:text-slate-300">
-                {t("warp.dependencyNote")}
-              </span>
-            )}
-            <button
-              className="text-accent underline-offset-2 hover:underline"
-              onClick={() => setPage("warp")}
-            >
-              {t("common.details")}
-            </button>
-            {!warp?.installed && <Badge tone="warn">{t("common.notInstalled")}</Badge>}
-          </span>
-        }
-      />
-
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
       <div className="mt-auto flex items-center justify-between rounded-2xl bg-white/60 px-5 py-3.5 text-sm ring-1 ring-slate-200/70 dark:bg-slate-900/60 dark:ring-slate-800">
         <span
           className={

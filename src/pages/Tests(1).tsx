@@ -30,11 +30,7 @@ interface ConfigRun {
 let savedRuns: ConfigRun[] = [];
 let savedBest: string | null = null;
 
-<<<<<<< HEAD
-export function TestsPage({ embedded }: { embedded?: boolean } = {}) {
-=======
 export function TestsPage() {
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const { t } = useTranslation();
   const { strategies, settings, status, updateSettings, refreshStatus } = useStore();
   const [mode, setMode] = useState<"standard" | "dpi">("standard");
@@ -42,64 +38,59 @@ export function TestsPage() {
   const [runs, setRuns] = useState<ConfigRun[]>(savedRuns);
   const [best, setBest] = useState<string | null>(savedBest);
   const [progress, setProgress] = useState<{ current: number; total: number } | null>(null);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const running = !!status?.testsRunning;
   const unlistenRef = useRef<UnlistenFn | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    const updateRuns = (fn: (prev: ConfigRun[]) => ConfigRun[]) => {
-      setRuns((prev) => {
-        const next = fn(prev);
-        savedRuns = next;
-        return next;
-      });
-    };
     listen<TestEvent>("test-event", (event) => {
       if (cancelled) return;
       const e = event.payload;
-      switch (e.kind) {
-        case "started":
-          setBest(null);
-          savedBest = null;
-          updateRuns(() =>
-            e.configs.map((config) => ({ config, results: [], done: false, ok: 0, fail: 0 })),
-          );
-          break;
-        case "config-start":
-          setProgress({ current: e.index + 1, total: e.total });
-          break;
-        case "target-result":
-          updateRuns((prev) =>
-            prev.map((r) =>
-              r.config === e.result.config ? { ...r, results: [...r.results, e.result] } : r,
-            ),
-          );
-          break;
-        case "config-done":
-          updateRuns((prev) =>
-            prev.map((r) =>
-              r.config === e.config
-                ? { ...r, done: true, ok: e.ok, fail: e.fail, error: e.error }
-                : r,
-            ),
-          );
-          break;
-        case "finished":
-          setBest(e.best);
-          savedBest = e.best;
-          setProgress(null);
-          refreshStatus();
-          break;
-        case "cancelled":
-          setProgress(null);
-          refreshStatus();
-          break;
-        case "error":
-          toast(errText(t, e.message), "fail");
-          setProgress(null);
-          refreshStatus();
-          break;
-      }
+      setRuns((prev) => {
+        let next = [...prev];
+        switch (e.kind) {
+          case "started":
+            next = e.configs.map((config) => ({ config, results: [], done: false, ok: 0, fail: 0 }));
+            setBest(null);
+            break;
+          case "config-start":
+            setProgress({ current: e.index + 1, total: e.total });
+            break;
+          case "target-result": {
+            const run = next.find((r) => r.config === e.result.config);
+            if (run) run.results = [...run.results, e.result];
+            break;
+          }
+          case "config-done": {
+            const run = next.find((r) => r.config === e.config);
+            if (run) {
+              run.done = true;
+              run.ok = e.ok;
+              run.fail = e.fail;
+              run.error = e.error;
+            }
+            break;
+          }
+          case "finished":
+            setBest(e.best);
+            savedBest = e.best;
+            setProgress(null);
+            refreshStatus();
+            break;
+          case "cancelled":
+            setProgress(null);
+            refreshStatus();
+            break;
+          case "error":
+            toast(errText(t, e.message), "fail");
+            setProgress(null);
+            refreshStatus();
+            break;
+        }
+        savedRuns = next;
+        return next;
+      });
     }).then((un) => {
       unlistenRef.current = un;
     });
@@ -152,15 +143,8 @@ export function TestsPage() {
   const serviceInstalled = !!status?.zapret.serviceInstalled;
 
   return (
-<<<<<<< HEAD
-    <div className={embedded ? "" : "mx-auto max-w-3xl"}>
-      {!embedded && (
-        <PageHeader title={t("tests.title")} description={t("tests.description")} />
-      )}
-=======
     <div className="mx-auto max-w-3xl">
       <PageHeader title={t("tests.title")} description={t("tests.description")} />
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
       <Card className="mb-4">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -270,18 +254,23 @@ export function TestsPage() {
                 </div>
               )}
               {run.results.length > 0 && (
-                <div className="mt-3 divide-y divide-slate-100 dark:divide-slate-800">
+                <div className="mt-3 space-y-1">
                   {run.results.map((r, i) => (
-                    <div key={i} className="flex items-center justify-between gap-3 px-2 py-1.5">
-                      <div className="min-w-0">
-                        <div className="truncate text-sm text-slate-600 dark:text-slate-300">{r.name}</div>
-                        {r.detail && (
-                          <div className="truncate font-mono text-[11px] leading-relaxed text-slate-400 dark:text-slate-500">
-                            {r.detail}
-                          </div>
-                        )}
-                      </div>
-                      <Badge tone={statusTone(r.status)}>{statusLabel(r.status)}</Badge>
+                    <div key={i}>
+                      <button
+                        className="flex w-full items-center justify-between gap-3 rounded-lg px-2 py-1.5 text-left text-sm hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                        onClick={() =>
+                          setExpanded(expanded === `${run.config}:${r.name}` ? null : `${run.config}:${r.name}`)
+                        }
+                      >
+                        <span className="min-w-0 truncate text-slate-600 dark:text-slate-300">{r.name}</span>
+                        <Badge tone={statusTone(r.status)}>{statusLabel(r.status)}</Badge>
+                      </button>
+                      {expanded === `${run.config}:${r.name}` && (
+                        <div className="mx-2 mb-1 rounded-lg bg-slate-50 px-3 py-2 font-mono text-[11px] leading-relaxed text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
+                          {r.detail}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

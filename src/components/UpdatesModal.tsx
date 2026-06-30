@@ -2,7 +2,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { api } from "../lib/api";
+<<<<<<< HEAD
 import { installAppUpdate, type AppUpdateProgress } from "../lib/appUpdate";
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 import { errText } from "../lib/errors";
 import { toast } from "../lib/toast";
 import { useStore } from "../lib/store";
@@ -13,13 +16,17 @@ export function UpdatesModal() {
   const {
     showUpdatesModal,
     updates,
+<<<<<<< HEAD
     appUpdate,
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     dismissUpdatesModal,
     refreshComponents,
     refreshStrategies,
     checkUpdates,
   } = useStore();
   const [installing, setInstalling] = useState<string | null>(null);
+<<<<<<< HEAD
   const [appInstalling, setAppInstalling] = useState<AppUpdateProgress | null>(null);
   const [confirm, setConfirm] = useState<"zapret" | "tgproxy" | null>(null);
 
@@ -29,6 +36,13 @@ export function UpdatesModal() {
 
   async function install(component: "zapret" | "tgproxy") {
     setConfirm(null);
+=======
+
+  const available = updates?.filter((u) => u.updateAvailable) ?? [];
+  if (!showUpdatesModal || available.length === 0) return null;
+
+  async function install(component: "zapret" | "tgproxy") {
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     setInstalling(component);
     try {
       await api.installComponent(component);
@@ -42,6 +56,7 @@ export function UpdatesModal() {
     }
   }
 
+<<<<<<< HEAD
   async function installApp() {
     setAppInstalling({ phase: "checking" });
     try {
@@ -64,19 +79,26 @@ export function UpdatesModal() {
         ? 100
         : null;
 
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   return (
     <Modal
       open
       onClose={dismissUpdatesModal}
       title={t("settings.updatesModalTitle")}
       footer={
+<<<<<<< HEAD
         <Button onClick={dismissUpdatesModal} disabled={installing !== null || appBusy}>
+=======
+        <Button onClick={dismissUpdatesModal} disabled={installing !== null}>
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
           {t("common.later")}
         </Button>
       }
     >
       <p className="mb-4">{t("settings.updatesModalText")}</p>
       <div className="space-y-2">
+<<<<<<< HEAD
         {appAvailable && (
           <div className="flex flex-col gap-2 rounded-xl bg-amber-500/10 px-4 py-3 ring-1 ring-amber-500/25 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -111,6 +133,8 @@ export function UpdatesModal() {
             </div>
           </div>
         )}
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
         {available.map((u) => (
           <div
             key={u.component}
@@ -135,7 +159,11 @@ export function UpdatesModal() {
             <Button
               variant="primary"
               disabled={installing !== null}
+<<<<<<< HEAD
               onClick={() => setConfirm(u.component)}
+=======
+              onClick={() => install(u.component)}
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
             >
               {installing === u.component ? <Spinner /> : null}
               {t("common.update")}
@@ -143,6 +171,7 @@ export function UpdatesModal() {
           </div>
         ))}
       </div>
+<<<<<<< HEAD
 
       <Modal
         open={confirm !== null}
@@ -163,6 +192,8 @@ export function UpdatesModal() {
             : t("settings.updateConfirmZapret")}
         </p>
       </Modal>
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     </Modal>
   );
 }

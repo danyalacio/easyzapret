@@ -6,11 +6,17 @@ export default {
   nav: {
     home: "Home",
     strategies: "Strategies",
+<<<<<<< HEAD
     zapret: "Zapret",
     service: "Zapret: Service",
     tests: "Zapret: Tests",
     lists: "Zapret: Lists",
     autopilot: "Autopilot",
+=======
+    service: "Zapret: Service",
+    tests: "Zapret: Tests",
+    lists: "Zapret: Lists",
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     telegram: "Telegram",
     logs: "Logs",
     settings: "Settings",
@@ -57,8 +63,11 @@ export default {
     tests_already_running: "Tests are already running.",
     service_installed: "The zapret service is installed. Remove it on the Service tab before running tests.",
     dpi_suite_unavailable: "Failed to fetch the DPI checkers suite. Check your network.",
+<<<<<<< HEAD
     zapret_required: "WARP only runs while Zapret is on. Turn on Zapret first.",
     warp_not_installed: "Cloudflare WARP is not installed. Install the 1.1.1.1 client and try again.",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     generic: "An error occurred: {{message}}",
   },
   home: {
@@ -66,8 +75,11 @@ export default {
     zapretDesc: "DPI bypass for Discord, YouTube and other services",
     tgTitle: "Telegram Proxy",
     tgDesc: "Local MTProto proxy (tg-ws-proxy) for Telegram Desktop",
+<<<<<<< HEAD
     warpTitle: "Cloudflare WARP",
     warpDesc: "Cloudflare tunnel on top of Zapret (runs only while Zapret is on)",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     strategy: "Strategy",
     noStrategy: "No strategy selected",
     viaService: "Running as a Windows service",
@@ -83,6 +95,7 @@ export default {
     updatesError: "check failed",
     checkNow: "Check now",
     installFirst: "Install the component first",
+<<<<<<< HEAD
     autopilotTitle: "Autopilot",
     autopilotDesc: "Monitors access and adjusts strategy automatically",
     autopilotOn: "Active",
@@ -164,6 +177,8 @@ export default {
     itemZapret:
       "Compact sidebar — Service, Tests and Lists are now tabs under a single Zapret section.",
     itemPurple: "New Amethyst dark theme — modern purple accent for 2026.",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   },
   setup: {
     title: "Initial setup",
@@ -188,6 +203,7 @@ export default {
       "Ready-made strategies from the FlowSeal release. The selected strategy is used by the Home screen toggle and the service installer.",
     empty: "No strategies found. Install zapret in Settings.",
     current: "Selected",
+<<<<<<< HEAD
     selected: "Current strategy",
     count: "{{count}} strategies",
     search: "Search by name…",
@@ -196,6 +212,8 @@ export default {
     groupAlt: "ALT",
     groupFakeTls: "FAKE TLS",
     groupSimpleFake: "SIMPLE FAKE",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     select: "Select",
     restartHint: "Zapret is running — restart it to apply the new strategy.",
     restartNow: "Restart with the new strategy",
@@ -317,6 +335,7 @@ export default {
     mediaHint:
       "Photos/videos not loading? In Telegram's proxy settings remove all DC → IP entries except 4:149.154.167.220. If that does not help, clear the list entirely.",
   },
+<<<<<<< HEAD
   warp: {
     title: "Cloudflare WARP",
     description:
@@ -347,11 +366,16 @@ export default {
     conflictNote:
       "WARP and Zapret both reshape network traffic. If the connection is unstable, try WARP+DoH mode or reconnect WARP.",
   },
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   logs: {
     title: "Logs",
     zapret: "Zapret",
     tgproxy: "Telegram Proxy",
+<<<<<<< HEAD
     warp: "WARP",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     tests: "Tests",
     app: "System",
     empty: "Log is empty",
@@ -367,13 +391,20 @@ export default {
     theme: "Theme",
     themeLight: "Light",
     themeDark: "Dark",
+<<<<<<< HEAD
     themePurple: "Amethyst",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     themeSystem: "System",
     dataDir: "Data folder",
     dataDirNote: "Fixed path — no cyrillic or spaces, as zapret requires.",
     components: "Components",
     checkUpdates: "Check for updates",
+<<<<<<< HEAD
     checkUpdatesOnStart: "Auto-check for updates (on start and hourly)",
+=======
+    checkUpdatesOnStart: "Check for updates on start",
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     updateAvailable: "Version {{version}} available",
     upToDate: "Up to date",
     notChecked: "Not checked",
@@ -392,6 +423,7 @@ export default {
     aboutText: "EasyZapret {{version}} — a GUI for FlowSeal's zapret-discord-youtube and tg-ws-proxy. Thanks to FlowSeal and bol-van.",
     updatesModalTitle: "Updates available",
     updatesModalText: "New component versions are out. Updating downloads the fresh release from GitHub (your user lists are preserved).",
+<<<<<<< HEAD
     appUpdateAvailable: "A new version of EasyZapret is available: {{version}}",
     appUpToDate: "You have the latest version of EasyZapret",
     downloadUpdate: "Download update",
@@ -405,6 +437,8 @@ export default {
     updateConfirmTg:
       "Telegram Proxy will be stopped before updating (TgWsProxy will close). You can start it again after the new version is installed. Continue?",
     updateContinue: "Stop and update",
+=======
+>>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   },
   adminWarning:
     "No administrator rights! Restart EasyZapret as administrator — otherwise zapret and services will not work.",

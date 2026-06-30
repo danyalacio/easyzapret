@@ -4,11 +4,7 @@ import { openPath } from "@tauri-apps/plugin-opener";
 import { api } from "../lib/api";
 import { Button, Card, Modal, PageHeader, Switch, cn } from "../components/ui";
 
-<<<<<<< HEAD
-const TABS = ["zapret", "tgproxy", "warp", "tests", "app"] as const;
-=======
 const TABS = ["zapret", "tgproxy", "tests", "app"] as const;
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 type Tab = (typeof TABS)[number];
 
 export function LogsPage() {
