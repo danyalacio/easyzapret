@@ -52,11 +52,32 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Test updater signing key
+      - name: Prepare signing secrets
         shell: bash
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: |
+          trim() { printf '%s' "$1" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'; }
+          key="$(trim "$TAURI_SIGNING_PRIVATE_KEY")"
+          # Single-line base64 keys must not keep accidental newlines from paste.
+          if ! echo "$key" | grep -q "encrypted secret key"; then
+            key="$(printf '%s' "$key" | tr -d '\n')"
+          fi
+          pass="$(trim "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD")"
+          if [ -z "$pass" ]; then
+            echo "::error::TAURI_SIGNING_PRIVATE_KEY_PASSWORD is empty"
+            exit 1
+          fi
+          {
+            echo "TAURI_SIGNING_PRIVATE_KEY<<__SIGNING_KEY_EOF__"
+            echo "$key"
+            echo "__SIGNING_KEY_EOF__"
+            echo "TAURI_SIGNING_PRIVATE_KEY_PASSWORD=$pass"
+          } >> "$GITHUB_ENV"
+
+      - name: Test updater signing key
+        shell: bash
         run: |
           set -e
           echo smoke > smoke.txt
@@ -70,8 +91,6 @@ jobs:
       - name: Build Tauri app
         shell: bash
         env:
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
           RUST_BACKTRACE: 1
         run: |
           set -o pipefail
