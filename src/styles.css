@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant purple (&:where(.theme-purple, .theme-purple *));
+
+:root {
+  color-scheme: light;
+  --accent: 20 184 166;
+  --accent-fg: 255 255 255;
+  --surface: 248 250 252;
+  --surface-elevated: 255 255 255;
+  --border: 226 232 240;
+  --muted: 100 116 139;
+}
+
+.dark {
+  color-scheme: dark;
+  --accent: 45 212 191;
+  --accent-fg: 15 23 42;
+  --surface: 2 6 23;
+  --surface-elevated: 15 23 42;
+  --border: 30 41 59;
+  --muted: 148 163 184;
+}
+
+.theme-purple {
+  color-scheme: dark;
+  --accent: 167 139 250;
+  --accent-fg: 250 245 255;
+  --surface: 12 10 28;
+  --surface-elevated: 22 18 42;
+  --border: 46 38 78;
+  --muted: 167 154 196;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    "Segoe UI Variable Display",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+  background: rgb(var(--surface));
+  color: rgb(15 23 42);
+}
+
+.dark body,
+.theme-purple body {
+  color: rgb(241 245 249);
+}
+
+textarea,
+input,
+pre,
+code {
+  user-select: text;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgb(var(--muted) / 0.35);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted) / 0.55);
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bg-accent {
+  background-color: rgb(var(--accent));
+}
+.bg-accent-soft {
+  background-color: rgb(var(--accent) / 0.12);
+}
+.text-accent {
+  color: rgb(var(--accent));
+}
+.ring-accent {
+  --tw-ring-color: rgb(var(--accent) / 0.35);
+}
+.border-accent-soft {
+  border-color: rgb(var(--accent) / 0.25);
+}
