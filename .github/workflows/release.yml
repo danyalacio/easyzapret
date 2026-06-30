@@ -52,13 +52,30 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
+      - name: Test updater signing key
+        shell: bash
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: |
+          set -e
+          echo smoke > smoke.txt
+          npx tauri signer sign smoke.txt
+          rm -f smoke.txt smoke.txt.sig
+
+      - name: Cargo build (release)
+        working-directory: src-tauri
+        run: cargo build --release
+
       - name: Build Tauri app
         shell: bash
         env:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
           RUST_BACKTRACE: 1
-        run: npm run tauri build -- --verbose 2>&1 | tee build.log
+        run: |
+          set -o pipefail
+          npm run tauri build -- --verbose 2>&1 | tee build.log
 
       - name: Upload build log on failure
         if: failure()
