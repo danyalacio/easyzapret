@@ -46,7 +46,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDc3Q0Q0NTFDMjUzNzlEMTYKUldRV25UY2xIRVhOZHhsZUV6Z3RlbDRWVEdLZUhXSXlReTB6WTdNc0xDNnIxNWxLWXB5dE5ic3QK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUxOEIwMzhCNTVCQUJCQTAKUldTZ3U3cFZpd09MVVV1b0N0Y3VPTlBma0FFZVc1c3lZZ21xaU53ZVJRcFl4YytXY3ZEZkkvQ0kK",
       "endpoints": [
         "https://github.com/danyalacio/easyzapret/releases/latest/download/latest.json"
       ],
