@@ -1,6 +1,6 @@
 <div align="center">
 
-<<<<<<< HEAD
+
 # EasyZapret
 
 **Десктопный менеджер для [zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube) и [tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy) от FlowSeal**
