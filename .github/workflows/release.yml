@@ -68,6 +68,13 @@ jobs:
           path: build.log
           if-no-files-found: ignore
 
+      - name: Print build log tail on failure
+        if: failure()
+        shell: bash
+        run: |
+          echo "===== last 120 lines of build.log ====="
+          tail -n 120 build.log || true
+
       - name: List bundle artifacts
         shell: bash
         run: |
