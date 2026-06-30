@@ -116,6 +116,40 @@ jobs:
         run: |
           ls -la src-tauri/target/release/bundle/nsis/ || ls -laR src-tauri/target/release/bundle/
 
+      - name: Generate latest.json
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          BUNDLE_DIR="src-tauri/target/release/bundle/nsis"
+          EXE=$(ls "$BUNDLE_DIR"/*-setup.exe | head -1)
+          SIG=$(ls "$BUNDLE_DIR"/*-setup.exe.sig | head -1)
+          VERSION=$(node -p "require('./src-tauri/tauri.conf.json').version")
+          EXE_NAME=$(basename "$EXE")
+          SIG_CONTENT=$(tr -d '\n\r' < "$SIG")
+          URL="https://github.com/danyalacio/easyzapret/releases/download/${RELEASE_TAG}/${EXE_NAME}"
+          export VERSION SIG_CONTENT URL RELEASE_TAG
+          node <<'NODE'
+          const fs = require("fs");
+          const manifest = {
+            version: process.env.VERSION,
+            notes: `EasyZapret ${process.env.RELEASE_TAG}`,
+            pub_date: new Date().toISOString(),
+            platforms: {
+              "windows-x86_64": {
+                signature: process.env.SIG_CONTENT,
+                url: process.env.URL,
+              },
+            },
+          };
+          fs.writeFileSync(
+            "src-tauri/target/release/bundle/nsis/latest.json",
+            JSON.stringify(manifest, null, 2),
+          );
+          NODE
+          cat src-tauri/target/release/bundle/nsis/latest.json
+
       - name: Publish draft release
         uses: softprops/action-gh-release@v2
         with:
@@ -123,8 +157,8 @@ jobs:
           name: EasyZapret ${{ github.ref_name }}
           draft: true
           generate_release_notes: true
+          fail_on_unmatched_files: true
           files: |
             src-tauri/target/release/bundle/nsis/*-setup.exe
-            src-tauri/target/release/bundle/nsis/*-setup.nsis.zip
-            src-tauri/target/release/bundle/nsis/*-setup.nsis.zip.sig
+            src-tauri/target/release/bundle/nsis/*-setup.exe.sig
             src-tauri/target/release/bundle/nsis/latest.json
