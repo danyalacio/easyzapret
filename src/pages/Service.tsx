@@ -20,11 +20,7 @@ import {
 } from "../components/ui";
 import type { DiagItem, HostsCheck, ServiceSettings } from "../lib/types";
 
-<<<<<<< HEAD
 export function ServicePage({ embedded }: { embedded?: boolean } = {}) {
-=======
-export function ServicePage() {
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const { t } = useTranslation();
   const { status, settings, refreshStatus } = useStore();
   const [svc, setSvc] = useState<ServiceSettings | null>(null);
@@ -65,15 +61,10 @@ export function ServicePage() {
     state === "RUNNING" ? "ok" : state === "STOP_PENDING" ? "warn" : "off";
 
   return (
-<<<<<<< HEAD
     <div className={embedded ? "" : "mx-auto max-w-3xl"}>
       {!embedded && (
         <PageHeader title={t("service.title")} description={t("service.description")} />
       )}
-=======
-    <div className="mx-auto max-w-3xl">
-      <PageHeader title={t("service.title")} description={t("service.description")} />
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
       {/* Status */}
       <Card className="mb-4">

@@ -3,10 +3,7 @@ import { useTranslation } from "react-i18next";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { api } from "../lib/api";
-<<<<<<< HEAD
 import { installAppUpdate, type AppUpdateProgress } from "../lib/appUpdate";
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 import { errText } from "../lib/errors";
 import { toast } from "../lib/toast";
 import { useStore } from "../lib/store";
@@ -15,10 +12,7 @@ import {
   Button,
   Card,
   FieldRow,
-<<<<<<< HEAD
   Modal,
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   Note,
   PageHeader,
   Segmented,
@@ -34,10 +28,7 @@ export function SettingsPage() {
     settings,
     components,
     updates,
-<<<<<<< HEAD
     appUpdate,
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     updateSettings,
     checkUpdates,
     refreshComponents,
@@ -46,11 +37,8 @@ export function SettingsPage() {
   const [installing, setInstalling] = useState<string | null>(null);
   const [progress, setProgress] = useState<InstallProgress | null>(null);
   const [checking, setChecking] = useState(false);
-<<<<<<< HEAD
   const [appInstalling, setAppInstalling] = useState<AppUpdateProgress | null>(null);
   const [confirm, setConfirm] = useState<"zapret" | "tgproxy" | null>(null);
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
   useEffect(() => {
     let un: UnlistenFn | null = null;
@@ -62,7 +50,6 @@ export function SettingsPage() {
     };
   }, []);
 
-<<<<<<< HEAD
   function requestInstall(component: "zapret" | "tgproxy") {
     const alreadyInstalled =
       component === "zapret" ? components?.zapretInstalled : components?.tgInstalled;
@@ -77,9 +64,6 @@ export function SettingsPage() {
 
   async function install(component: "zapret" | "tgproxy") {
     setConfirm(null);
-=======
-  async function install(component: "zapret" | "tgproxy") {
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     setInstalling(component);
     try {
       await api.installComponent(component);
@@ -93,7 +77,6 @@ export function SettingsPage() {
     }
   }
 
-<<<<<<< HEAD
   async function onInstallAppUpdate() {
     setAppInstalling({ phase: "checking" });
     try {
@@ -116,8 +99,6 @@ export function SettingsPage() {
         ? 100
         : null;
 
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   async function onCheckUpdates() {
     setChecking(true);
     try {
@@ -172,11 +153,7 @@ export function SettingsPage() {
         <Button
           variant={upd?.updateAvailable || !installed ? "primary" : "secondary"}
           disabled={installing !== null}
-<<<<<<< HEAD
           onClick={() => requestInstall(component)}
-=======
-          onClick={() => install(component)}
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
         >
           {busy ? <Spinner /> : null}
           {busy
@@ -218,10 +195,7 @@ export function SettingsPage() {
               { value: "system", label: t("settings.themeSystem") },
               { value: "light", label: t("settings.themeLight") },
               { value: "dark", label: t("settings.themeDark") },
-<<<<<<< HEAD
               { value: "purple", label: t("settings.themePurple") },
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
             ]}
             onChange={(theme) => updateSettings({ theme })}
           />
@@ -265,13 +239,8 @@ export function SettingsPage() {
         <Note tone="fail" title={t("settings.fakeRepos")}>
           {t("settings.fakeReposText")}
         </Note>
-<<<<<<< HEAD
         <Note tone={appUpdate?.updateAvailable ? "warn" : "info"} title={t("settings.about")}>
           {t("settings.aboutText", { version: appInfo?.version ?? "0.3.0" })}{" "}
-=======
-        <Note tone="info" title={t("settings.about")}>
-          {t("settings.aboutText", { version: appInfo?.version ?? "0.1.0" })}{" "}
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
           <button
             className="underline"
             onClick={() => openUrl("https://github.com/Flowseal/zapret-discord-youtube").catch(() => {})}
@@ -285,7 +254,6 @@ export function SettingsPage() {
           >
             tg-ws-proxy
           </button>
-<<<<<<< HEAD
           <div className="mt-2">
             {appUpdate?.updateAvailable ? (
               <div className="flex flex-wrap items-center gap-2">
@@ -341,10 +309,6 @@ export function SettingsPage() {
             : t("settings.updateConfirmZapret")}
         </p>
       </Modal>
-=======
-        </Note>
-      </div>
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     </div>
   );
 }

@@ -5,7 +5,6 @@ export interface AppInfo {
   isWindows: boolean;
 }
 
-<<<<<<< HEAD
 export interface AutopilotSettings {
   enabled: boolean;
   intervalMinutes: number;
@@ -30,16 +29,10 @@ export interface AutopilotSettings {
 export interface Settings {
   language: "ru" | "en" | null;
   theme: "light" | "dark" | "purple" | "system";
-=======
-export interface Settings {
-  language: "ru" | "en" | null;
-  theme: "light" | "dark" | "system";
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   selectedStrategy: string | null;
   zapretVersion: string | null;
   tgVersion: string | null;
   checkUpdatesOnStart: boolean;
-<<<<<<< HEAD
   autopilot: AutopilotSettings;
   lastSeenChangelogVersion: string | null;
 }
@@ -61,8 +54,6 @@ export interface AutopilotEvent {
   fromStrategy: string | null;
   toStrategy: string | null;
   healthPercent: number | null;
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 }
 
 export interface ComponentsState {
@@ -93,7 +84,6 @@ export interface TgStatus {
   shareLink: string | null;
 }
 
-<<<<<<< HEAD
 export interface WarpStatus {
   installed: boolean;
   connected: boolean;
@@ -107,11 +97,6 @@ export interface FullStatus {
   tg: TgStatus;
   warp: WarpStatus;
   autopilot: AutopilotStatus;
-=======
-export interface FullStatus {
-  zapret: ZapretStatus;
-  tg: TgStatus;
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   testsRunning: boolean;
 }
 
@@ -130,7 +115,6 @@ export interface UpdateStatus {
   error: string | null;
 }
 
-<<<<<<< HEAD
 export interface AppUpdateStatus {
   current: string;
   latest: string | null;
@@ -139,8 +123,6 @@ export interface AppUpdateStatus {
   error: string | null;
 }
 
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 export interface DiagItem {
   id: string;
   status: "ok" | "warn" | "fail";

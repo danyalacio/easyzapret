@@ -30,11 +30,7 @@ interface ConfigRun {
 let savedRuns: ConfigRun[] = [];
 let savedBest: string | null = null;
 
-<<<<<<< HEAD
 export function TestsPage({ embedded }: { embedded?: boolean } = {}) {
-=======
-export function TestsPage() {
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const { t } = useTranslation();
   const { strategies, settings, status, updateSettings, refreshStatus } = useStore();
   const [mode, setMode] = useState<"standard" | "dpi">("standard");
@@ -152,15 +148,10 @@ export function TestsPage() {
   const serviceInstalled = !!status?.zapret.serviceInstalled;
 
   return (
-<<<<<<< HEAD
     <div className={embedded ? "" : "mx-auto max-w-3xl"}>
       {!embedded && (
         <PageHeader title={t("tests.title")} description={t("tests.description")} />
       )}
-=======
-    <div className="mx-auto max-w-3xl">
-      <PageHeader title={t("tests.title")} description={t("tests.description")} />
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
       <Card className="mb-4">
         <div className="flex flex-wrap items-end justify-between gap-4">

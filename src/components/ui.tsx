@@ -15,11 +15,7 @@ export function Button({
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant }) {
   const variants: Record<ButtonVariant, string> = {
     primary:
-<<<<<<< HEAD
       "bg-accent text-[rgb(var(--accent-fg))] hover:opacity-90 active:opacity-80 disabled:bg-slate-300 dark:disabled:bg-slate-700",
-=======
-      "bg-teal-600 text-white hover:bg-teal-500 active:bg-teal-700 disabled:bg-slate-300 dark:disabled:bg-slate-700",
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     secondary:
       "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700 dark:hover:bg-slate-700",
     danger:
@@ -47,11 +43,7 @@ export function Card({
   return (
     <div
       className={cn(
-<<<<<<< HEAD
         "rounded-2xl bg-[rgb(var(--surface-elevated))] p-5 shadow-sm ring-1 ring-[rgb(var(--border)/0.65)]",
-=======
-        "rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200/70 dark:bg-slate-900 dark:ring-slate-800",
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
         className,
       )}
       {...props}
@@ -86,11 +78,7 @@ export function Switch({
       className={cn(
         "relative inline-flex shrink-0 items-center rounded-full p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-50",
         dims.track,
-<<<<<<< HEAD
         checked ? "bg-accent" : "bg-slate-300 dark:bg-slate-700",
-=======
-        checked ? "bg-teal-500" : "bg-slate-300 dark:bg-slate-700",
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
       )}
     >
       <span
@@ -114,11 +102,7 @@ export function Badge({
   children: React.ReactNode;
 }) {
   const tones = {
-<<<<<<< HEAD
     ok: "bg-accent-soft text-accent",
-=======
-    ok: "bg-teal-500/15 text-teal-700 dark:text-teal-300",
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     off: "bg-slate-500/15 text-slate-600 dark:text-slate-300",
     warn: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
     fail: "bg-red-500/15 text-red-700 dark:text-red-300",
@@ -138,11 +122,7 @@ export function Badge({
 
 export function StatusDot({ tone }: { tone: "ok" | "off" | "warn" | "fail" }) {
   const colors = {
-<<<<<<< HEAD
     ok: "bg-accent",
-=======
-    ok: "bg-teal-500",
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     off: "bg-slate-400",
     warn: "bg-amber-500",
     fail: "bg-red-500",
@@ -156,11 +136,7 @@ export function Spinner({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-<<<<<<< HEAD
         "inline-block h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-[rgb(var(--accent))]",
-=======
-        "inline-block h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-teal-600",
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
         className,
       )}
     />
@@ -191,11 +167,7 @@ export function Segmented<T extends string>({
           className={cn(
             "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors disabled:opacity-50",
             value === opt.value
-<<<<<<< HEAD
               ? "bg-[rgb(var(--surface-elevated))] text-slate-900 shadow-sm dark:text-white"
-=======
-              ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white"
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
               : "text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200",
           )}
         >

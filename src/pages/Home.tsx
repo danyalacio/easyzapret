@@ -46,11 +46,7 @@ function BigToggleCard({
             className={
               "flex h-14 w-14 items-center justify-center rounded-2xl transition-colors " +
               (on
-<<<<<<< HEAD
                 ? "bg-accent-soft text-accent"
-=======
-                ? "bg-teal-500/15 text-teal-600 dark:text-teal-400"
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
                 : "bg-slate-100 text-slate-400 dark:bg-slate-800")
             }
           >
@@ -79,32 +75,20 @@ function BigToggleCard({
 
 export function HomePage() {
   const { t } = useTranslation();
-<<<<<<< HEAD
   const { status, settings, components, updates, appUpdate, updatesCheckedAt, updatesError, refreshStatus, checkUpdates, setPage, updateSettings } =
-=======
-  const { status, settings, components, updates, updatesCheckedAt, updatesError, refreshStatus, checkUpdates, setPage } =
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     useStore();
 
   const [zapretBusy, setZapretBusy] = useState(false);
   const [tgBusy, setTgBusy] = useState(false);
-<<<<<<< HEAD
   const [warpBusy, setWarpBusy] = useState(false);
   const [zapretError, setZapretError] = useState<string | null>(null);
   const [tgError, setTgError] = useState<string | null>(null);
   const [warpError, setWarpError] = useState<string | null>(null);
-=======
-  const [zapretError, setZapretError] = useState<string | null>(null);
-  const [tgError, setTgError] = useState<string | null>(null);
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const [checking, setChecking] = useState(false);
 
   const zapret = status?.zapret;
   const tg = status?.tg;
-<<<<<<< HEAD
   const warp = status?.warp;
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const zapretOn = !!(zapret?.running || zapret?.serviceState === "RUNNING");
   const viaService = !zapret?.running && zapret?.serviceState === "RUNNING";
 
@@ -159,7 +143,6 @@ export function HomePage() {
     }
   }
 
-<<<<<<< HEAD
   async function toggleWarp(value: boolean) {
     setWarpError(null);
     if (value && !warp?.installed) {
@@ -187,8 +170,6 @@ export function HomePage() {
     }
   }
 
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   async function onCheckUpdates() {
     setChecking(true);
     try {
@@ -198,11 +179,7 @@ export function HomePage() {
     }
   }
 
-<<<<<<< HEAD
   const updatesAvailable = updates?.some((u) => u.updateAvailable) || appUpdate?.updateAvailable;
-=======
-  const updatesAvailable = updates?.some((u) => u.updateAvailable);
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   const updatesLabel = !updatesCheckedAt
     ? t("home.updatesUnknown")
     : updatesError
@@ -213,7 +190,6 @@ export function HomePage() {
 
   return (
     <div className="mx-auto flex h-full max-w-3xl flex-col gap-5">
-<<<<<<< HEAD
       {settings && (
         <Card className="flex flex-wrap items-center justify-between gap-4 p-4">
           <div className="flex items-center gap-3">
@@ -252,8 +228,6 @@ export function HomePage() {
         </Card>
       )}
 
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
       <BigToggleCard
         icon={
           <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
@@ -273,11 +247,7 @@ export function HomePage() {
               {t("home.strategy")}:
             </span>
             <button
-<<<<<<< HEAD
               className="text-accent underline-offset-2 hover:underline"
-=======
-              className="text-teal-600 underline-offset-2 hover:underline dark:text-teal-400"
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
               onClick={() => setPage("strategies")}
             >
               {viaService
@@ -312,11 +282,7 @@ export function HomePage() {
               {tg?.host ?? "127.0.0.1"}:{tg?.port ?? 1443}
             </code>
             <button
-<<<<<<< HEAD
               className="text-accent underline-offset-2 hover:underline"
-=======
-              className="text-teal-600 underline-offset-2 hover:underline dark:text-teal-400"
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
               onClick={() => setPage("telegram")}
             >
               {t("common.details")}
@@ -326,7 +292,6 @@ export function HomePage() {
         }
       />
 
-<<<<<<< HEAD
       <BigToggleCard
         icon={
           <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
@@ -360,8 +325,6 @@ export function HomePage() {
         }
       />
 
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
       <div className="mt-auto flex items-center justify-between rounded-2xl bg-white/60 px-5 py-3.5 text-sm ring-1 ring-slate-200/70 dark:bg-slate-900/60 dark:ring-slate-800">
         <span
           className={

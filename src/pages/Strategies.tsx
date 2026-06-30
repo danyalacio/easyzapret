@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 import { useMemo, useState } from "react";
-=======
-import { useState } from "react";
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 import { useTranslation } from "react-i18next";
 import { api } from "../lib/api";
 import { errText } from "../lib/errors";
 import { toast } from "../lib/toast";
 import { useStore } from "../lib/store";
-<<<<<<< HEAD
 import { Badge, Button, Card, Note, PageHeader, Spinner, cn } from "../components/ui";
 
 type StrategyGroup = "base" | "alt" | "fakeTls" | "simpleFake";
@@ -26,23 +21,16 @@ function strategyGroup(filename: string): StrategyGroup {
   if (pretty.includes("SIMPLE FAKE")) return "simpleFake";
   return "alt";
 }
-=======
-import { Badge, Button, Card, Note, PageHeader, cn } from "../components/ui";
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
 export function StrategiesPage() {
   const { t } = useTranslation();
   const { strategies, settings, status, updateSettings, refreshStatus } = useStore();
   const [restarting, setRestarting] = useState(false);
-<<<<<<< HEAD
   const [query, setQuery] = useState("");
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
 
   const selected = settings?.selectedStrategy;
   const zapretRunning = !!status?.zapret.running;
 
-<<<<<<< HEAD
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return strategies;
@@ -60,9 +48,6 @@ export function StrategiesPage() {
 
   async function select(name: string) {
     if (name === selected) return;
-=======
-  async function select(name: string) {
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
     await updateSettings({ selectedStrategy: name });
   }
 
@@ -81,7 +66,6 @@ export function StrategiesPage() {
     }
   }
 
-<<<<<<< HEAD
   function groupLabel(id: StrategyGroup) {
     switch (id) {
       case "base":
@@ -95,13 +79,10 @@ export function StrategiesPage() {
     }
   }
 
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
   return (
     <div className="mx-auto max-w-3xl">
       <PageHeader title={t("strategies.title")} description={t("strategies.description")} />
 
-<<<<<<< HEAD
       {selected && (
         <Card className="mb-4 flex items-center justify-between gap-4 bg-accent-soft border-accent-soft">
           <div className="min-w-0">
@@ -116,16 +97,11 @@ export function StrategiesPage() {
         </Card>
       )}
 
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
       {zapretRunning && status?.zapret.currentStrategy !== selected && (
         <div className="mb-4 flex items-center justify-between gap-3 rounded-xl bg-amber-500/10 px-4 py-3 text-sm text-amber-800 ring-1 ring-amber-500/25 dark:text-amber-200">
           <span>{t("strategies.restartHint")}</span>
           <Button variant="primary" onClick={restartWithSelected} disabled={restarting}>
-<<<<<<< HEAD
             {restarting ? <Spinner /> : null}
-=======
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
             {t("strategies.restartNow")}
           </Button>
         </div>
@@ -136,7 +112,6 @@ export function StrategiesPage() {
           <p className="text-sm text-slate-500">{t("strategies.empty")}</p>
         </Card>
       ) : (
-<<<<<<< HEAD
         <>
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-sm text-slate-500">{t("strategies.count", { count: strategies.length })}</span>
@@ -214,34 +189,6 @@ export function StrategiesPage() {
             </div>
           )}
         </>
-=======
-        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-          {strategies.map((name) => {
-            const isSelected = name === selected;
-            const pretty = name.replace(/\.bat$/i, "");
-            return (
-              <button
-                key={name}
-                onClick={() => select(name)}
-                className={cn(
-                  "flex items-center justify-between gap-3 rounded-2xl p-4 text-left ring-1 transition-all",
-                  isSelected
-                    ? "bg-teal-500/10 ring-2 ring-teal-500"
-                    : "bg-white ring-slate-200/70 hover:ring-slate-300 dark:bg-slate-900 dark:ring-slate-800 dark:hover:ring-slate-700",
-                )}
-              >
-                <div className="min-w-0">
-                  <div className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">
-                    {pretty}
-                  </div>
-                  <div className="mt-0.5 truncate text-xs text-slate-400">{name}</div>
-                </div>
-                {isSelected && <Badge tone="ok">{t("strategies.current")}</Badge>}
-              </button>
-            );
-          })}
-        </div>
->>>>>>> 4c8fd6dce1bc08e1814f72bf7fdd1a10f0f9fbf9
       )}
 
       <div className="mt-5">
