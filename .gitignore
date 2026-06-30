@@ -1,5 +1,5 @@
-# Logs
-logs
+# Runtime log output at repo root (not src-tauri/src/logs Rust module)
+/logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
