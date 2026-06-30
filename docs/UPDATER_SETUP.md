@@ -18,7 +18,7 @@
 
 | Секрет | Значение |
 |--------|----------|
-| `TAURI_SIGNING_PRIVATE_KEY` | **Весь** текст из `~/.tauri/easyzapret-updater.key` (скопировать файл целиком) |
+| `TAURI_SIGNING_PRIVATE_KEY` | Содержимое `~/.tauri/easyzapret-updater.key` **целиком** (может быть одной строкой base64 — вставь как есть) |
 | `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | Пароль, который задавал при `tauri signer generate` |
 
 **Важно для CI:** секрет должен быть **Repository secret** (не Environment). Файл должен начинаться с `untrusted comment: minisign encrypted secret key`.

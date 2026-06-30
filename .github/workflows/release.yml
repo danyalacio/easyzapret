@@ -39,12 +39,13 @@ jobs:
             echo "::error::TAURI_SIGNING_PRIVATE_KEY secret is empty"
             exit 1
           fi
-          if echo "$TAURI_SIGNING_PRIVATE_KEY" | grep -q "minisign encrypted secret key"; then
-            echo "Signing key: raw minisign format"
-          elif echo "$TAURI_SIGNING_PRIVATE_KEY" | base64 -d 2>/dev/null | grep -q "minisign encrypted secret key"; then
-            echo "Signing key: base64-encoded minisign format"
+          key="$TAURI_SIGNING_PRIVATE_KEY"
+          if echo "$key" | grep -qi "encrypted secret key"; then
+            echo "Signing key: raw format"
+          elif printf '%s' "$key" | tr -d '\n\r ' | base64 -d 2>/dev/null | grep -qi "encrypted secret key"; then
+            echo "Signing key: base64-encoded format"
           else
-            echo "::error::TAURI_SIGNING_PRIVATE_KEY looks invalid. Paste the full .key file or base64-encode it (see docs/UPDATER_SETUP.md)."
+            echo "::error::TAURI_SIGNING_PRIVATE_KEY looks invalid. Paste ~/.tauri/easyzapret-updater.key as-is (see docs/UPDATER_SETUP.md)."
             exit 1
           fi
 
