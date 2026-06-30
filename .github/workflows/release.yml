@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,38 +19,58 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: x86_64-pc-windows-msvc
 
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
 
+      - name: Validate signing key secret
+        shell: bash
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          if [ -z "$TAURI_SIGNING_PRIVATE_KEY" ]; then
+            echo "::error::TAURI_SIGNING_PRIVATE_KEY secret is empty"
+            exit 1
+          fi
+          if echo "$TAURI_SIGNING_PRIVATE_KEY" | grep -q "minisign encrypted secret key"; then
+            echo "Signing key: raw minisign format"
+          elif echo "$TAURI_SIGNING_PRIVATE_KEY" | base64 -d 2>/dev/null | grep -q "minisign encrypted secret key"; then
+            echo "Signing key: base64-encoded minisign format"
+          else
+            echo "::error::TAURI_SIGNING_PRIVATE_KEY looks invalid. Paste the full .key file or base64-encode it (see docs/UPDATER_SETUP.md)."
+            exit 1
+          fi
+
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Build and release
-        uses: tauri-apps/tauri-action@v0
+      - name: Build Tauri app
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-        with:
-          tagName: ${{ github.ref_name }}
-          releaseName: EasyZapret ${{ github.ref_name }}
-          releaseBody: |
-            См. описание релиза на GitHub.
+        run: npm run tauri build -- --verbose
 
-            Для встроенного обновления в релиз должны попасть:
-            - `EasyZapret_*_x64-setup.exe`
-            - `*.nsis.zip` и `.sig`
-            - `latest.json`
-          releaseDraft: true
-          prerelease: false
-          args: --target x86_64-pc-windows-msvc
+      - name: List bundle artifacts
+        shell: bash
+        run: |
+          ls -la src-tauri/target/release/bundle/nsis/ || ls -laR src-tauri/target/release/bundle/
+
+      - name: Publish draft release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: EasyZapret ${{ github.ref_name }}
+          draft: true
+          generate_release_notes: true
+          files: |
+            src-tauri/target/release/bundle/nsis/*-setup.exe
+            src-tauri/target/release/bundle/nsis/*-setup.nsis.zip
+            src-tauri/target/release/bundle/nsis/*-setup.nsis.zip.sig
+            src-tauri/target/release/bundle/nsis/latest.json
