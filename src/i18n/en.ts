@@ -87,7 +87,7 @@ export default {
     autopilotDesc: "Monitors access and adjusts strategy automatically",
     autopilotOn: "Active",
     autopilotChecking: "Checking…",
-    autopilotHealth: "Health: {{percent}}%",
+    autopilotHealth: "Availability: {{percent}}%",
   },
   zapret: {
     title: "Zapret",
@@ -101,10 +101,10 @@ export default {
   autopilot: {
     title: "Autopilot",
     description:
-      "Background health checks for Discord, YouTube and other targets. When quality drops, EasyZapret can rotate strategies and optionally enable WARP or Telegram Proxy.",
+      "Background availability checks for Discord, YouTube and other targets. When access quality drops, EasyZapret can rotate strategies and optionally enable WARP.",
     enabled: "Enable Autopilot",
     enabledDesc: "Runs checks on a schedule while the app is open.",
-    health: "Health",
+    health: "Availability",
     lastCheck: "Last check",
     policy: "Mode",
     policyLabel: "Policy",
@@ -115,7 +115,7 @@ export default {
     interval: "Check interval",
     intervalDesc: "How often to probe targets in the background.",
     policyDesc: "Which strategies to try first when switching.",
-    switchModeDesc: "How Autopilot picks the next strategy when health is low.",
+    switchModeDesc: "How Autopilot picks the next strategy when availability is low.",
     switchModes: {
       rotate_policy: "Policy rotation",
       rotate_custom: "My list only",
@@ -133,37 +133,35 @@ export default {
       speed: "Speed",
       gaming: "Gaming",
     },
-    minHealth: "Minimum health",
+    minHealth: "Minimum availability",
     minHealthDesc: "React when fewer probes succeed than this threshold.",
     autoSwitch: "Auto-switch strategy",
-    autoSwitchDesc: "Rotate to the next strategy in the policy list when health is low.",
+    autoSwitchDesc: "Rotate to the next strategy in the policy list when availability is low.",
     maxSwitches: "Max switches per hour",
     maxSwitchesDesc: "Prevents rapid flipping between strategies.",
     onlyWhenZapret: "Only when Zapret is on",
     onlyWhenZapretDesc: "Skip checks while Zapret is stopped.",
     probes: "Probe targets",
     autoWarp: "Auto-enable WARP",
-    autoWarpDesc: "Turn on WARP when health is degraded (requires Zapret).",
-    autoTg: "Auto-enable Telegram Proxy",
-    autoTgDesc: "Start tg-ws-proxy when health is degraded.",
+    autoWarpDesc: "Turn on WARP when availability drops (requires Zapret).",
     notifySwitch: "Notify on strategy switch",
-    notifyDegraded: "Notify on degraded health",
+    notifyDegraded: "Notify on low availability",
     serviceNote:
       "Autopilot cannot rotate strategies while the Windows zapret service is installed — remove the service on the Service tab first.",
     toastSwitch: "Autopilot: {{from}} → {{to}}",
-    toastDegraded: "Autopilot: health dropped to {{percent}}%",
+    toastDegraded: "Autopilot: availability dropped to {{percent}}%",
   },
   whatsNew: {
     title: "What's new in v{{version}}",
     intro: "A few highlights in this release:",
     gotIt: "Got it",
-    itemAutopilot:
-      "Autopilot modes — policy rotation, your own strategy list, or pick the best by quick tests.",
-    itemUpdater:
-      "In-app updates — install a new EasyZapret version from Settings or the update prompt (signed GitHub releases).",
-    itemZapret:
-      "Compact sidebar — Service, Tests and Lists are now tabs under a single Zapret section.",
-    itemPurple: "New Amethyst dark theme — modern purple accent for 2026.",
+    itemAutopilotFix:
+      "Fixed UI freeze during automatic strategy switches — heavy work now runs off the main async path.",
+    itemAutopilotWarp:
+      "Autopilot no longer auto-starts Telegram Proxy; only auto-enable WARP remains.",
+    itemPurple:
+      "Amethyst theme reworked — deep VS Code–style dark UI with violet accents.",
+    itemI18n: "Improved Russian localization and clearer “availability” wording.",
   },
   setup: {
     title: "Initial setup",

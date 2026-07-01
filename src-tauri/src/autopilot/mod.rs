@@ -335,7 +335,6 @@ async fn pick_best_by_tests(candidates: &[String], from: &str) -> Option<String>
 
 async fn apply_strategy_switch(
     app: &AppHandle,
-    state: &AppState,
     cfg: &AutopilotSettings,
     persisted: &mut PersistedState,
     from: &str,
@@ -345,9 +344,31 @@ async fn apply_strategy_switch(
         return None;
     }
 
-    crate::zapret::process::stop(state);
-    if crate::zapret::process::start_strategy(state, next).is_err() {
-        return None;
+    let next_owned = next.to_string();
+    let from_owned = from.to_string();
+    let app_handle = app.clone();
+
+    set_cache(|c| {
+        c.checking = true;
+        c.last_message = Some(format!("Switching {from_owned} → {next_owned}…"));
+    });
+
+    let started = tokio::task::spawn_blocking(move || {
+        let state = app_handle.state::<AppState>();
+        crate::zapret::process::stop(&state);
+        crate::zapret::process::wait_for_winws_exit(std::time::Duration::from_secs(8));
+        crate::zapret::process::start_strategy(&state, &next_owned)
+    })
+    .await;
+
+    set_cache(|c| c.checking = false);
+
+    match started {
+        Ok(Ok(())) => {}
+        _ => {
+            set_cache(|c| c.last_message = Some("Strategy switch failed".into()));
+            return None;
+        }
     }
 
     let mut s = settings::load();
@@ -374,7 +395,6 @@ async fn apply_strategy_switch(
 
 async fn try_switch_strategy(
     app: &AppHandle,
-    state: &AppState,
     cfg: &AutopilotSettings,
     persisted: &mut PersistedState,
     from: &str,
@@ -420,7 +440,7 @@ async fn try_switch_strategy(
         }
     };
 
-    apply_strategy_switch(app, state, cfg, persisted, from, &next).await
+    apply_strategy_switch(app, cfg, persisted, from, &next).await
 }
 
 async fn maybe_enable_modules(app: &AppHandle, state: &AppState, cfg: &AutopilotSettings) {
@@ -429,19 +449,36 @@ async fn maybe_enable_modules(app: &AppHandle, state: &AppState, cfg: &Autopilot
             let _ = crate::warp::connect_with_state(state);
         }
     }
-    if cfg.auto_enable_tg && paths::tg_exe().exists() && !crate::tg_proxy::proxy_running() {
-        let _ = crate::tg_proxy::start_tg();
-    }
     let _ = app;
 }
 
+struct AutopilotBusyGuard(AppHandle);
+
+impl Drop for AutopilotBusyGuard {
+    fn drop(&mut self) {
+        self.0
+            .state::<AppState>()
+            .autopilot_busy
+            .store(false, Ordering::SeqCst);
+    }
+}
+
 pub async fn run_health_cycle(app: AppHandle) {
+    let state = app.state::<AppState>();
+    if state
+        .autopilot_busy
+        .compare_exchange(false, true, Ordering::SeqCst, Ordering::SeqCst)
+        .is_err()
+    {
+        return;
+    }
+    let _busy = AutopilotBusyGuard(app.clone());
+
     let cfg = settings::load().autopilot;
     if !cfg.enabled {
         return;
     }
 
-    let state = app.state::<AppState>();
     if state.tests_running.load(Ordering::SeqCst) {
         return;
     }
@@ -497,7 +534,7 @@ pub async fn run_health_cycle(app: AppHandle) {
                 .selected_strategy
                 .unwrap_or_else(|| "general.bat".into());
             let mut persisted = load_persisted();
-            let _ = try_switch_strategy(&app, &state, &cfg, &mut persisted, &current).await;
+            let _ = try_switch_strategy(&app, &cfg, &mut persisted, &current).await;
             maybe_enable_modules(&app, &state, &cfg).await;
         }
     }

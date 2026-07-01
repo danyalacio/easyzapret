@@ -19,7 +19,6 @@ export interface AutopilotSettings {
   probeCloudflare: boolean;
   probeGoogle: boolean;
   autoEnableWarp: boolean;
-  autoEnableTg: boolean;
   notifyOnSwitch: boolean;
   notifyOnDegraded: boolean;
   maxSwitchesPerHour: number;

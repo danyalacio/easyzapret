@@ -17,10 +17,10 @@ export function Button({
     primary:
       "bg-accent text-[rgb(var(--accent-fg))] hover:opacity-90 active:opacity-80 disabled:bg-slate-300 dark:disabled:bg-slate-700",
     secondary:
-      "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700 dark:hover:bg-slate-700",
+      "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50 dark:bg-[rgb(var(--surface-elevated))] dark:text-[rgb(var(--text))] dark:ring-[rgb(var(--border)/0.65)] dark:hover:bg-[rgb(var(--accent)/0.08)]",
     danger:
       "bg-red-600/10 text-red-600 ring-1 ring-red-600/30 hover:bg-red-600/20 dark:text-red-400",
-    ghost: "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800",
+    ghost: "text-slate-600 hover:bg-slate-100 dark:text-[rgb(var(--text-secondary))] dark:hover:bg-[rgb(var(--accent)/0.08)]",
   };
   return (
     <button
@@ -157,7 +157,7 @@ export function Segmented<T extends string>({
   disabled?: boolean;
 }) {
   return (
-    <div className="inline-flex rounded-xl bg-slate-100 p-1 dark:bg-slate-800">
+    <div className="inline-flex rounded-xl bg-slate-100 p-1 dark:bg-[rgb(var(--surface))]">
       {options.map((opt) => (
         <button
           key={opt.value}
@@ -204,7 +204,7 @@ export function Modal({
       />
       <div
         className={cn(
-          "relative z-10 max-h-[85vh] w-full overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900",
+          "relative z-10 max-h-[85vh] w-full overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl dark:bg-[rgb(var(--surface-elevated))]",
           wide ? "max-w-2xl" : "max-w-md",
         )}
       >

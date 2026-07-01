@@ -239,9 +239,6 @@ export function AutopilotPage() {
         <FieldRow title={t("autopilot.autoWarp")} description={t("autopilot.autoWarpDesc")}>
           <Switch checked={ap.autoEnableWarp} disabled={busy} onChange={(v) => patch({ autoEnableWarp: v })} />
         </FieldRow>
-        <FieldRow title={t("autopilot.autoTg")} description={t("autopilot.autoTgDesc")}>
-          <Switch checked={ap.autoEnableTg} disabled={busy} onChange={(v) => patch({ autoEnableTg: v })} />
-        </FieldRow>
         <FieldRow title={t("autopilot.notifySwitch")}>
           <Switch checked={ap.notifyOnSwitch} disabled={busy} onChange={(v) => patch({ notifyOnSwitch: v })} />
         </FieldRow>

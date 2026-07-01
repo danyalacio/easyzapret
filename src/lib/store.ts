@@ -89,7 +89,6 @@ function defaultAutopilot(): Settings["autopilot"] {
     probeCloudflare: true,
     probeGoogle: false,
     autoEnableWarp: false,
-    autoEnableTg: false,
     notifyOnSwitch: true,
     notifyOnDegraded: true,
     maxSwitchesPerHour: 3,

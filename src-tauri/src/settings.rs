@@ -24,7 +24,6 @@ pub struct AutopilotSettings {
     pub probe_cloudflare: bool,
     pub probe_google: bool,
     pub auto_enable_warp: bool,
-    pub auto_enable_tg: bool,
     pub notify_on_switch: bool,
     pub notify_on_degraded: bool,
     /// Cap automatic strategy rotations per hour.
@@ -48,7 +47,6 @@ impl Default for AutopilotSettings {
             probe_cloudflare: true,
             probe_google: false,
             auto_enable_warp: false,
-            auto_enable_tg: false,
             notify_on_switch: true,
             notify_on_degraded: true,
             max_switches_per_hour: 3,

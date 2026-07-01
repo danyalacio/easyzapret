@@ -11,6 +11,8 @@
   --surface-elevated: 255 255 255;
   --border: 226 232 240;
   --muted: 100 116 139;
+  --text: 15 23 42;
+  --text-secondary: 100 116 139;
 }
 
 .dark {
@@ -21,16 +23,21 @@
   --surface-elevated: 15 23 42;
   --border: 30 41 59;
   --muted: 148 163 184;
+  --text: 241 245 249;
+  --text-secondary: 148 163 184;
 }
 
+/* Amethyst — VS Code–style deep dark with violet accents */
 .theme-purple {
   color-scheme: dark;
   --accent: 167 139 250;
-  --accent-fg: 250 245 255;
-  --surface: 12 10 28;
-  --surface-elevated: 22 18 42;
-  --border: 46 38 78;
-  --muted: 167 154 196;
+  --accent-fg: 255 255 255;
+  --surface: 13 13 15;
+  --surface-elevated: 24 24 27;
+  --border: 55 48 74;
+  --muted: 161 161 170;
+  --text: 228 228 231;
+  --text-secondary: 161 161 170;
 }
 
 html,
@@ -51,12 +58,19 @@ body {
   overflow: hidden;
   user-select: none;
   background: rgb(var(--surface));
-  color: rgb(15 23 42);
+  color: rgb(var(--text));
 }
 
 .dark body,
 .theme-purple body {
-  color: rgb(241 245 249);
+  color: rgb(var(--text));
+}
+
+.theme-purple body {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -30%, rgb(139 92 246 / 0.14), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgb(124 58 237 / 0.08), transparent 50%),
+    rgb(var(--surface));
 }
 
 textarea,
@@ -75,7 +89,7 @@ code {
   background: rgb(var(--muted) / 0.35);
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--muted) / 0.55);
+  background: rgb(var(--accent) / 0.45);
 }
 *::-webkit-scrollbar-track {
   background: transparent;
@@ -95,4 +109,72 @@ code {
 }
 .border-accent-soft {
   border-color: rgb(var(--accent) / 0.25);
+}
+
+/* Amethyst theme: remap hard-coded slate utilities to CSS variables */
+.theme-purple .text-slate-900,
+.theme-purple .text-slate-800,
+.theme-purple .text-slate-700 {
+  color: rgb(var(--text)) !important;
+}
+.theme-purple .text-slate-600,
+.theme-purple .text-slate-500,
+.theme-purple .text-slate-400 {
+  color: rgb(var(--text-secondary)) !important;
+}
+.theme-purple .text-slate-300 {
+  color: rgb(var(--text) / 0.85) !important;
+}
+.theme-purple .dark\:text-white,
+.theme-purple .dark\:text-slate-100,
+.theme-purple .dark\:text-slate-200,
+.theme-purple .dark\:text-slate-300 {
+  color: rgb(var(--text)) !important;
+}
+.theme-purple .dark\:text-slate-400 {
+  color: rgb(var(--text-secondary)) !important;
+}
+
+.theme-purple .bg-white,
+.theme-purple .dark\:bg-slate-900,
+.theme-purple .dark\:bg-slate-800 {
+  background-color: rgb(var(--surface-elevated)) !important;
+}
+.theme-purple .bg-slate-100,
+.theme-purple .dark\:bg-slate-800\/50 {
+  background-color: rgb(var(--surface)) !important;
+}
+.theme-purple .hover\:bg-slate-50:hover,
+.theme-purple .dark\:hover\:bg-slate-700:hover,
+.theme-purple .dark\:hover\:bg-slate-800:hover {
+  background-color: rgb(var(--accent) / 0.08) !important;
+}
+
+.theme-purple .ring-slate-200,
+.theme-purple .dark\:ring-slate-700 {
+  --tw-ring-color: rgb(var(--border) / 0.65) !important;
+}
+
+.theme-purple aside {
+  background:
+    linear-gradient(180deg, rgb(var(--surface-elevated)) 0%, rgb(var(--surface)) 100%);
+  border-color: rgb(var(--border) / 0.5) !important;
+}
+
+.theme-purple .rounded-2xl.bg-\[rgb\(var\(--surface-elevated\)\)\] {
+  box-shadow:
+    0 0 0 1px rgb(var(--border) / 0.4),
+    0 4px 24px rgb(0 0 0 / 0.35);
+}
+
+.theme-purple button[role="switch"]:not([aria-checked="true"]) {
+  background-color: rgb(var(--border)) !important;
+}
+
+.theme-purple .bg-accent-soft {
+  background-color: rgb(var(--accent) / 0.14);
+}
+
+.theme-purple .inline-flex.rounded-full.bg-accent-soft {
+  box-shadow: inset 0 0 0 1px rgb(var(--accent) / 0.2);
 }

@@ -25,6 +25,7 @@ pub struct AppState {
     pub current_strategy: Mutex<Option<String>>,
     pub tests_cancel: Arc<AtomicBool>,
     pub tests_running: AtomicBool,
+    pub autopilot_busy: AtomicBool,
     pub tray: Mutex<Option<tray::TrayHandles>>,
     /// Whether the user wants WARP connected. Used to auto-disconnect WARP when
     /// Zapret stops, since WARP is only allowed to run alongside Zapret.
@@ -38,6 +39,7 @@ impl Default for AppState {
             current_strategy: Mutex::new(None),
             tests_cancel: Arc::new(AtomicBool::new(false)),
             tests_running: AtomicBool::new(false),
+            autopilot_busy: AtomicBool::new(false),
             tray: Mutex::new(None),
             warp_active: AtomicBool::new(false),
         }
@@ -77,12 +79,13 @@ struct FullStatus {
 #[tauri::command]
 fn get_status(app: AppHandle, state: State<'_, AppState>) -> FullStatus {
     // Reap the child if winws died on its own (e.g. driver blocked).
-    {
-        let mut guard = state.zapret_child.lock().unwrap();
+    if let Ok(mut guard) = state.zapret_child.try_lock() {
         if let Some(child) = guard.as_mut() {
             if let Ok(Some(_)) = child.try_wait() {
                 *guard = None;
-                *state.current_strategy.lock().unwrap() = None;
+                if let Ok(mut cur) = state.current_strategy.try_lock() {
+                    *cur = None;
+                }
             }
         }
     }

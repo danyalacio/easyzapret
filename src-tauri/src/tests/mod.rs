@@ -574,18 +574,27 @@ fn score_outcome(status: &str) -> usize {
 
 /// Quick benchmark used by autopilot `best_by_tests` mode. Starts winws, probes targets, stops.
 pub async fn quick_benchmark_strategy(strategy: &str) -> Result<(usize, usize), String> {
-    let _ = strategy::ensure_user_lists();
-    let args = strategy::winws_args(strategy)?;
-    crate::zapret::process::kill_all_winws();
+    let strategy_owned = strategy.to_string();
 
-    let exe = paths::zapret_bin_dir().join("winws.exe");
-    let mut child = crate::util::hidden_command(&exe.to_string_lossy())
-        .args(&args)
-        .current_dir(paths::zapret_bin_dir())
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .spawn()
-        .map_err(|e| format!("winws start failed: {e}"))?;
+    let spawn_result = tokio::task::spawn_blocking(move || -> Result<(), String> {
+        let _ = strategy::ensure_user_lists();
+        let args = strategy::winws_args(&strategy_owned)?;
+        crate::zapret::process::kill_all_winws();
+
+        let exe = paths::zapret_bin_dir().join("winws.exe");
+        crate::util::hidden_command(&exe.to_string_lossy())
+            .args(&args)
+            .current_dir(paths::zapret_bin_dir())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .map_err(|e| format!("winws start failed: {e}"))?;
+        Ok(())
+    })
+    .await
+    .map_err(|e| format!("benchmark task failed: {e}"))??;
+
+    let _ = spawn_result;
 
     tokio::time::sleep(std::time::Duration::from_secs(4)).await;
 
@@ -598,9 +607,11 @@ pub async fn quick_benchmark_strategy(strategy: &str) -> Result<(usize, usize), 
     }
     let total = sample.len() * 3;
 
-    let _ = child.kill();
-    let _ = child.wait();
-    crate::zapret::process::kill_all_winws();
+    tokio::task::spawn_blocking(|| {
+        crate::zapret::process::kill_all_winws();
+    })
+    .await
+    .map_err(|e| format!("benchmark cleanup failed: {e}"))?;
 
     Ok((score, total))
 }

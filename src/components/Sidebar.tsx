@@ -79,7 +79,7 @@ export function Sidebar() {
       </nav>
 
       <div className="px-4 py-3 text-[10px] text-slate-400">
-        v{appInfo?.version ?? "0.3.0"}
+        v{appInfo?.version ?? "0.3.1"}
       </div>
     </aside>
   );
